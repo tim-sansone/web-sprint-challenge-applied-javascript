@@ -1,3 +1,5 @@
+  import axios from "axios"
+  
   // TASK 3
   // ---------------------
   // Implement this function which takes an array of strings ("topics") as its only argument.
@@ -35,7 +37,15 @@
   //
   
   const tabsAppender = (selector) => {
-      
+      const entry = document.querySelector(selector);
+      axios.get("http://localhost:5001/api/topics")
+        .then((res) => {
+          const topics = Tabs(res.data.topics);
+          entry.appendChild(topics);
+        })
+        .catch((err) => {
+          console.log(err);
+        })
   }
 
 export { Tabs, tabsAppender }
