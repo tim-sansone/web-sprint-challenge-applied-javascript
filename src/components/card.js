@@ -66,6 +66,12 @@
     const entry = document.querySelector(selector);
     axios.get("http://localhost:5001/api/articles")
       .then((res) => {
+        Object.values(res.data.articles).forEach(each => {
+          each.forEach(each => {
+            const newCard = Card(each);
+            entry.appendChild(newCard);
+          })
+        })
         console.log(res);
       })
       .catch((err) => {
@@ -74,3 +80,9 @@
   }
 
 export { Card, cardAppender }
+
+
+// res.data.articles["article category"].article
+// 
+// we need to grab each item (which is an array) in the articles object
+// then we need to loop over the items in that array, run them through our Card function, and append them to entry
